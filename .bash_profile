@@ -13,7 +13,7 @@ export PS1="\n(\!)-(\[\e[37m\]\t\[\e[0m\])-(\[\e[31m\]\u\[\e[0m\])-(\[\e[36m\]\w
 # Add another directory to path, for MRI analysis software
 export PATH=$PATH:~/abin
 
-# ??? --- Don't know what this is about, I didn't do it ... 
+# ??? --- Don't know what this is about, I didn't do it ...
 export DYLD_FALLBACK_LIBRARY_PATH=$DYLD_FALLBACK_LIBRARY_PATH:~/abin
 
 
