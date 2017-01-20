@@ -64,7 +64,10 @@ filetype plugin indent on    " required
 " below is done in the above vundle slab
 " filetype plugin indent on
 
-:imap jj <Esc>
+imap jj <Esc>
+
+let mapleader=','
+
 set nu
 
 " for powerline ... ok for airline too I presume (??)
@@ -76,7 +79,23 @@ set t_Co=256
 set fillchars+=stl:\ ,stlnc:\
 set term=xterm-256color
 set termencoding=utf-8
+
+" tab line navigation short cuts
 set showtabline=2
+nmap <leader>t :enew<CR>
+nmap <leader>] :bnext<CR>
+nmap <leader>[ :bprevious<CR>
+nmap <leader>w :bp <BAR> bd #<CR>
+nmap <leader>1 :1b<CR>
+nmap <leader>2 :2b<CR>
+nmap <leader>3 :3b<CR>
+nmap <leader>4 :4b<CR>
+nmap <leader>5 :5b<CR>
+nmap <leader>6 :6b<CR>
+nmap <leader>7 :7b<CR>
+
+
+
 
 
 " for airline (better than powerline?)
