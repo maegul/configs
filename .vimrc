@@ -17,7 +17,16 @@ Plugin 'jez/vim-superman'
 
 Plugin 'vim-airline/vim-airline'
 
+" Git wrapper, to integrate also with airline
+Plugin 'tpope/vim-fugitive'
+
+" Show git hunks
 Plugin 'airblade/vim-gitgutter'
+
+
+
+
+" Vundle examples ... only github probably matters ...
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -58,7 +67,7 @@ filetype plugin indent on    " required
 :imap jj <Esc>
 set nu
 
-" for powerline
+" for powerline ... ok for airline too I presume (??)
 set laststatus=2
 set guifont=Inconsolata\ for\ Powerline:h15
 let g:Powerline_symbols = 'fancy'
@@ -73,6 +82,16 @@ set showtabline=2
 " for airline (better than powerline?)
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+" manage section truncation
+let g:airline#extensions#default#section_truncate_width = {
+      \ 'x': 60,
+      \ 'y': 88,
+      \ 'z': 45,
+      \ 'warning': 80,
+      \ 'error': 80,
+      \ }
+
+
 
 
 syntax on
