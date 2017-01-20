@@ -84,6 +84,7 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 " manage section truncation
 let g:airline#extensions#default#section_truncate_width = {
+      \ 'c': 50,
       \ 'x': 60,
       \ 'y': 88,
       \ 'z': 45,
