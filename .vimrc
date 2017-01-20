@@ -83,8 +83,8 @@ set termencoding=utf-8
 " tab line navigation short cuts
 set showtabline=2
 nmap <leader>t :enew<CR>
-nmap <leader>] :bnext<CR>
-nmap <leader>[ :bprevious<CR>
+nmap <leader>d :bnext<CR>
+nmap <leader>a :bprevious<CR>
 nmap <leader>w :bp <BAR> bd #<CR>
 nmap <leader>1 :1b<CR>
 nmap <leader>2 :2b<CR>
