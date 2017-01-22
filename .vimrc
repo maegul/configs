@@ -67,12 +67,16 @@ filetype plugin indent on    " required
 
 " Escape substitutes
 imap jj <Esc>
-vmap jj <Esc> 
+vmap jj <Esc>
 
 
 let mapleader=','
 
 set nu
+
+" bracket highlight when completed
+set showmatch
+set matchtime=3
 
 " for powerline ... ok for airline too I presume (??)
 set laststatus=2
