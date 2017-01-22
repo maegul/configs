@@ -64,7 +64,11 @@ filetype plugin indent on    " required
 " below is done in the above vundle slab
 " filetype plugin indent on
 
+
+" Escape substitutes
 imap jj <Esc>
+vmap jj <Esc> 
+
 
 let mapleader=','
 
@@ -85,6 +89,7 @@ set showtabline=2
 nmap <leader>t :enew<CR>
 nmap <leader>d :bnext<CR>
 nmap <leader>a :bprevious<CR>
+" close current buffer and go to previous
 nmap <leader>w :bp <BAR> bd #<CR>
 nmap <leader>1 :1b<CR>
 nmap <leader>2 :2b<CR>
