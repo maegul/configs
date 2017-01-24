@@ -1,4 +1,7 @@
 set nocompatible              " be iMproved, required
+
+" Added filetype on to fix exit code bug toying with ipython
+filetype on
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
