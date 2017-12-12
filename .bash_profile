@@ -41,6 +41,14 @@ export LD_LIBRARY_PATH="/Users/errollloyd/anaconda/lib:$LD_LIBRARY_PATH" #added 
 
 export PATH="$HOME/bin:$PATH"
 
+# NPM global installs available by require()
+export NODE_PATH=/usr/local/lib/node_modules
+
+# shell options
+
+# extglob - more regex options (?)
+shopt -s extglob
+
 
 
 # Some alias play ... yay!
