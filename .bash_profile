@@ -86,6 +86,13 @@ vman() {
 }
 
 
+# quick find in current directory
+function myfind { find . -iname "$1" -print; }
+
+
+
+
+
 # Open safari window and start jupyter notebook kernel 
 ######
 # Requires the window to be refreshed
