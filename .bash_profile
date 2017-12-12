@@ -28,7 +28,12 @@ export DYLD_FALLBACK_LIBRARY_PATH=$DYLD_FALLBACK_LIBRARY_PATH:~/abin
 
 export PATH=/Applications/NEURON-7.4/nrn/x86_64/bin:$PATH #added by NEURON installer
 export PYTHONPATH=${PYTHONPATH}:/Applications/NEURON-7.4/nrn/lib/python #added by NEURON installer
-export PYTHONHOME="/Users/errollloyd/anaconda" #added by NEURON installer
+
+# The line below appears unnecessary ... adding anaconda/bin to PATH is sufficient.
+# Indeed, the below breaks pip's ability to be environment aware in conda environments
+# export PYTHONHOME="/Users/errollloyd/anaconda" #added by NEURON installer
+
+# not sure what this is about or why it's necessary ... my remove
 export LD_LIBRARY_PATH="/Users/errollloyd/anaconda/lib:$LD_LIBRARY_PATH" #added by NEURON installer
 
 
