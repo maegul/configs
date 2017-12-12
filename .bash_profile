@@ -15,6 +15,10 @@ parse_git_branch(){ git branch 2>/dev/null | grep '^*' | colrm 1 2;}
 
 export PS1="\n(\!)-(\[\e[31m\]\u\[\e[0m\])-(\[\e[36m\]\w\[\e[0m\])-(\[\e[35m\]\$(parse_git_branch)\[\e[0m\])\n> "
 
+# Change terminal colors
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+
 # Add another directory to path, for MRI analysis software
 export PATH=$PATH:~/abin
 
