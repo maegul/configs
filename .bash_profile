@@ -86,3 +86,23 @@ vman() {
 }
 
 
+# Open safari window and start jupyter notebook kernel 
+######
+# Requires the window to be refreshed
+# Relies on an Apple Script to open a new window with a particular URL
+# All of this is necessary just to keep the auto open tab behaviour of safari ... there's probably a better way
+function jnb {
+
+	for n in {0..20}
+	do let nn=8888+n
+		if lsof -Pi :$nn -sTCP:LISTEN -t >/dev/null; then
+			echo "$nn already being used";
+		else
+			osascript ~/Library/Scripts/jnb_saf_open.scpt "http://localhost:$nn"
+			jupyter notebook --port=$nn --no-browser
+			break
+		fi
+	done
+
+}
+
