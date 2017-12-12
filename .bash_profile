@@ -52,7 +52,28 @@ shopt -s extglob
 
 
 # Some alias play ... yay!
-alias ll='ls -la'
+alias ll='ls -laF'
+
+# git aliases
+alias git_mylog='git log --oneline --graph'
+
+# python web server
+alias py_serve='python -m SimpleHTTPServer'
+
+# spartan SSH
+alias spartan_ssh='ssh errol@spartan.hpc.unimelb.edu.au'
+
+alias spartan_ssh_io='ssh errol@spartan-io.hpc.unimelb.edu.au'
+
+# mac pro ssh
+
+alias mac_pro_ssh='ssh Errol@errol-mac-pro.mobility.unimelb.net.au'
+
+
+# matlab no desktop alias
+
+alias matlab_cl='matlab -nodesktop -nodisplay -nosplash'
+
 
 
 # for viewing man pages in vim
