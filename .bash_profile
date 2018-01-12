@@ -8,12 +8,27 @@ export PATH="/Users/errollloyd/anaconda/bin:$PATH"
 export PYTHONPATH=${PYTHONPATH}:~/Dropbox/Science/scripts/
 
 # Edits prompt
+
 #old
 #export PS1="\n(\!)-(\[\e[37m\]\t\[\e[0m\])-(\[\e[31m\]\u\[\e[0m\])-(\[\e[36m\]\w\[\e[0m\])\n> "
 
-parse_git_branch(){ git branch 2>/dev/null | grep '^*' | colrm 1 2;}
 
-export PS1="\n(\!)-(\[\e[31m\]\u\[\e[0m\])\n(\[\e[36m\]\w\[\e[0m\])-(\[\e[35m\]\$(parse_git_branch)\[\e[0m\])\n> "
+# USing git-prompt (semi-official)
+
+source ~/.git-prompt.sh
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWSTASHSTATE=1
+GIT_PS1_SHOWCOLORHINTS=1
+
+export PS1="\n(\!)-(\[\e[31m\]\u\[\e[0m\])\n(\[\e[36m\]\w\[\e[0m\])\[\e[35m\]\$(__git_ps1 '(%s)')\[\e[0m\]\n> "
+
+
+#Old custom git prompt
+#parse_git_branch(){ git branch 2>/dev/null | grep '^*' | colrm 1 2;}
+
+#export PS1="\n(\!)-(\[\e[31m\]\u\[\e[0m\])\n(\[\e[36m\]\w\[\e[0m\])-(\[\e[35m\]\$(parse_git_branch)\[\e[0m\])\n> "
+
 
 # Change terminal colors
 export CLICOLOR=1
@@ -73,6 +88,11 @@ alias mac_pro_ssh='ssh Errol@errol-mac-pro.mobility.unimelb.net.au'
 # matlab no desktop alias
 
 alias matlab_cl='matlab -nodesktop -nodisplay -nosplash'
+
+
+# get current ip address
+
+alias my_ip='ipconfig getifaddr en0'
 
 
 
