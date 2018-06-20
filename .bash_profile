@@ -23,7 +23,22 @@ GIT_PS1_SHOWSTASHSTATE=1
 GIT_PS1_SHOWCOLORHINTS=1
 GIT_PS1_SHOWUPSTREAM="auto"
 
-export PS1="\n(\!)-(\[\e[31m\]\u\[\e[0m\])\n(\[\e[36m\]\w\[\e[0m\])\[\e[35m\]\$(__git_ps1 '(%s)')\[\e[0m\]\n> "
+# prompt
+# export PS1="\n(\!)-(\[\e[31m\]\u\[\e[0m\])\n(\[\e[36m\]\w\[\e[0m\])\[\e[35m\]\$(__git_ps1 '(%s)')\[\e[0m\]\n> "
+
+# addings a pushd dirs to prompt when more than one in stack
+print_dirs(){ 
+	if (($(dirs -v | wc -l) > 1));
+	then
+		echo -e "\n$(dirs -v | tail -n +2)";
+	fi	
+}
+
+export PS1="\n(\!)-(\[\e[31m\]\u\[\e[0m\])\n(\[\e[36m\]\w\[\e[0m\])\[\e[35m\]\$(__git_ps1 '(%s)')\[\e[32m\]\$(print_dirs)\[\e[0m\]\[\e[0m\]\n> "
+
+
+# Adds script for git autocomplete
+source ~/git-completion.bash
 
 
 #Old custom git prompt
@@ -66,13 +81,22 @@ export NODE_PATH=/usr/local/lib/node_modules
 # extglob - more regex options (?)
 shopt -s extglob
 
+# history management
+# allow preceding whitespace to prevent from being logged in history
+HISTCONTROL=ignorespace
 
+HISTSIZE=5000
+HISTFILESIZE=20000
+
+shopt -s histappend
 
 # Some alias play ... yay!
-alias ll='ls -laF'
+alias ll='ls -haltF'
 
 # git aliases
-alias git_mylog='git log --oneline --graph'
+alias git_mylog="git log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short"
+
+alias git_mylog_graph='git log --oneline --graph'
 
 # python web server
 alias py_serve='python -m SimpleHTTPServer'
@@ -111,7 +135,30 @@ vman() {
 # quick find in current directory
 function myfind { find . -iname "$1" -print; }
 
+# make and change to directory
+mkcd()
+{
+	mkdir -- "$1" &&
+		cd -- "$1"
+}
 
+# aliases for pushd stack usage
+#alias pcd='pushd'
+pcd_re='^[0-9]+$'
+pcd()
+{
+	if [[ "$1" =~ $pcd_re ]] ; then
+		pushd +"$1" > /dev/null
+	else
+		pushd "$1" > /dev/null
+	fi   	
+}
+alias dirs='dirs -v'
+mkpcd()
+{
+	mkdir -- "$1" &&
+		pcd "$1"
+}
 
 
 
