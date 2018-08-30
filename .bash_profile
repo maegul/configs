@@ -4,10 +4,22 @@ export EDITOR=vim
 export PATH="$(/Users/errollloyd/.dotfiles/custom_path.sh)"
 
 # added by Anaconda 1.8.0 installer
-export PATH="/Users/errollloyd/anaconda/bin:$PATH"
+# export PATH="/Users/errollloyd/anaconda/bin:$PATH"
+
+# export PATH=$PATH:~/abin
+
+# export PATH=/Applications/NEURON-7.4/nrn/x86_64/bin:$PATH #added by NEURON installer
+
+# export PATH="/usr/local/bin:$PATH"
+
+# export PATH="$HOME/bin:$PATH"
 
 # Adds my personal script library to pythonpath
 export PYTHONPATH=${PYTHONPATH}:~/Dropbox/Science/scripts/
+
+# For terminus in sublime text
+bind '"\e[1;3C": forward-word' 
+bind '"\e[1;3D": backward-word'
 
 # Edits prompt
 
@@ -36,7 +48,7 @@ print_dirs(){
 	fi	
 }
 
-export PS1="\n(\!)-(\[\e[31m\]\u\[\e[0m\])\n(\[\e[36m\]\w\[\e[0m\])\[\e[35m\]\$(__git_ps1 '(%s)')\[\e[32m\]\$(print_dirs)\[\e[0m\]\[\e[0m\]\n> "
+export PS1="\n(\!)-(\[\e[31m\]\u\[\e[0m\])(\[\e[38;5;208m\]\$(backup_since)\[\e[0m\])\n(\[\e[36m\]\w\[\e[0m\])\[\e[35m\]\$(__git_ps1 '(%s)')\[\e[36;2m\]\$(print_dirs)\[\e[0m\]\[\e[0m\]\n> "
 
 
 # Adds script for git autocomplete
@@ -54,13 +66,11 @@ export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
 # Add another directory to path, for MRI analysis software
-export PATH=$PATH:~/abin
 
 # ??? --- Don't know what this is about, I didn't do it ...
 export DYLD_FALLBACK_LIBRARY_PATH=$DYLD_FALLBACK_LIBRARY_PATH:~/abin
 
 
-export PATH=/Applications/NEURON-7.4/nrn/x86_64/bin:$PATH #added by NEURON installer
 export PYTHONPATH=${PYTHONPATH}:/Applications/NEURON-7.4/nrn/lib/python #added by NEURON installer
 
 # The line below appears unnecessary ... adding anaconda/bin to PATH is sufficient.
@@ -70,10 +80,13 @@ export PYTHONPATH=${PYTHONPATH}:/Applications/NEURON-7.4/nrn/lib/python #added b
 # not sure what this is about or why it's necessary ... my remove
 export LD_LIBRARY_PATH="/Users/errollloyd/anaconda/lib:$LD_LIBRARY_PATH" #added by NEURON installer
 
+# Add User executables to path early so that they override /usr/bin
+
+
+### this directory should be used by HomeBrew.  It should also be added by path_helper through /etc/paths, but in the wrong order.  I don't want to muck around with /etc/paths, so Im adding it here.  It will probably appear twice in PATH now. :(
 
 # Add personal executables in $HOME/bin to path
 
-export PATH="$HOME/bin:$PATH"
 
 # NPM global installs available by require()
 export NODE_PATH=/usr/local/lib/node_modules
