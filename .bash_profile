@@ -141,6 +141,20 @@ alias matlab_cl='matlab -nodesktop -nodisplay -nosplash'
 alias my_ip='ipconfig getifaddr en0'
 
 
+# tmux aliases
+
+# create new named tmux session
+alias tm_new="tmux new -s"
+
+# list sessions
+alias tm_ls="tmux ls"
+
+# attach to named session
+alias tm_at="tmux a -t"
+
+# kill named session
+alias tm_kill="tmux kill-session -t"
+
 
 # for viewing man pages in vim
 vman() {
