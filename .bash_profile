@@ -121,9 +121,14 @@ alias spartan_ssh='ssh errol@spartan.hpc.unimelb.edu.au'
 
 alias spartan_ssh_io='ssh errol@spartan-io.hpc.unimelb.edu.au'
 
+# nectar errol-test ssh
+alias nectar_test_ssh='ssh -i ~/.ssh/nectar_private_key ubuntu@115.146.92.170'
+
 # mac pro ssh
 
 alias mac_pro_ssh='ssh Errol@errol-mac-pro.mobility.unimelb.net.au'
+
+alias mac_pro_hal_ssh='ssh Hal@errol-mac-pro.mobility.unimelb.net.au'
 
 
 # matlab no desktop alias
