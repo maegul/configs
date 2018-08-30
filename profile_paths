@@ -1,0 +1,15 @@
+
+# so anaconda python precedes brew python
+/Users/errollloyd/anaconda/bin
+
+# personal binaries
+/Users/errollloyd/bin
+
+# brew binaries
+/usr/local/bin
+
+# NEURON ... bless its heart
+/Applications/NEURON-7.4/nrn/x86_64/bin
+
+# for some old binaries that are probably not there any more :(
+/Users/errollloyd/abin

@@ -1,5 +1,7 @@
 # for using het conda installation
 #VIRTUAL_ENV_DISABLE_PROMPT=1 source /Users/errollloyd/Library/Enthought/Canopy_64bit/User/bin/activate
+export EDITOR=vim
+export PATH="$(/Users/errollloyd/.dotfiles/custom_path.sh)"
 
 # added by Anaconda 1.8.0 installer
 export PATH="/Users/errollloyd/anaconda/bin:$PATH"
