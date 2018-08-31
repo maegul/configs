@@ -155,6 +155,14 @@ alias tm_at="tmux a -t"
 # kill named session
 alias tm_kill="tmux kill-session -t"
 
+# Misc Aliases
+
+# sublime text
+
+## Go to User folder of current sublime text install
+alias goto_sublime_user='cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User'
+
+
 
 # for viewing man pages in vim
 vman() {
