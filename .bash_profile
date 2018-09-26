@@ -70,6 +70,11 @@ source ~/.dotfiles/date_cols_test.sh
 # unicode for a filled sun symbol
 time_sun_symbol="\xe2\x98\x80"
 
+print_time_symbol()
+{
+	echo -e "$(tput setaf $(date_col_parse))${time_sun_symbol} $(tput sgr0)"
+}
+
 # Converts RGB coords (6x6x6) to ASNI color code
 function RGBcolor {                                               
     echo "16 + $1 * 36 + $2 * 6 + $3" | bc                        
@@ -88,7 +93,8 @@ gitPrompt=$(tput setaf $(RGBcolor 3 0 3) )
 
 
 PS1="\n"
-PS1+="\$(echo -e '$(tput setaf $(date_col_parse))${time_sun_symbol}$(tput sgr0) ')"
+# PS1+="\$(echo -e '$(tput setaf $(date_col_parse))${time_sun_symbol}$(tput sgr0) ')"
+PS1+="\$(print_time_symbol)"
 PS1+="\[${bold}\]"
 # PS1+="\[${rev}\]"
 PS1+="\[${col_BUTime}\]\$(print_backup_check)"
