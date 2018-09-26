@@ -21,6 +21,12 @@ export PYTHONPATH=${PYTHONPATH}:~/Dropbox/Science/scripts/
 bind '"\e[1;3C": forward-word' 
 bind '"\e[1;3D": backward-word'
 
+
+###
+# Prompt
+###
+
+
 # Edits prompt
 
 #old
@@ -48,9 +54,51 @@ print_dirs(){
 	fi	
 }
 
-export PS1="\n(\!)-(\[\e[31m\]\u\[\e[0m\])(\[\e[38;5;208m\]\$(backup_since)\[\e[0m\])\n(\[\e[36m\]\w\[\e[0m\])\[\e[35m\]\$(__git_ps1 '(%s)')\[\e[36;2m\]\$(print_dirs)\[\e[0m\]\[\e[0m\]\n> "
+print_backup_check()
+{
+	time_since=$(backup_since)
+	if [[ $time_since > 1 ]]; then
+		echo "(${time_since})"
+	fi
+}
+
+# export PS1="\n(\[${hist_number}\]\[${hist_numberBG}\]\!\[${reset}\])-(\[\e[31m\]\u\[\e[0m\])(\[\e[38;5;208m\]\$(backup_since)\[\e[0m\])\n(\[\e[36m\]\w\[\e[0m\])\[\e[35m\]\$(__git_ps1 '(%s)')\[\e[36;2m\]\$(print_dirs)\[\e[0m\]\[\e[0m\]\n> "
+# export PS1="\n(\[${hist_number}\]\[${hist_numberBG}\]\!\[${reset}\])-(\[\e[31m\]\u\[\e[0m\])(\[\e[38;5;208m\]\$(backup_since)\[\e[0m\])\n(\[\e[36m\]\w\[\e[0m\])\[\e[35m\]\$(__git_ps1 '(%s)')\[\e[36;2m\]\$(print_dirs)\[\e[0m\]\[\e[0m\]\n> "
+
+# For converting current time to col idx from file
+source ~/.dotfiles/date_cols_test.sh
+# unicode for a filled sun symbol
+time_sun_symbol="\xe2\x98\x80"
+
+# Converts RGB coords (6x6x6) to ASNI color code
+function RGBcolor {                                               
+    echo "16 + $1 * 36 + $2 * 6 + $3" | bc                        
+} 
+
+# Predefined colors
+reset=$(tput sgr0)
+bold=$(tput bold)
+rev=$(tput rev)
+# hist_numberBG=$(tput setab 33)
+# hist_number=$(tput setaf 213)
+col_BUTime=$(tput setaf 208)
+gitPrompt=$(tput setaf $(RGBcolor 3 0 3) )
+
+# Converts time of day to col from 30 cols in ANSI_cols_by_hue
 
 
+PS1="\n"
+PS1+="\$(echo -e '$(tput setaf $(date_col_parse))${time_sun_symbol}$(tput sgr0) ')"
+PS1+="\[${bold}\]"
+# PS1+="\[${rev}\]"
+PS1+="\[${col_BUTime}\]\$(print_backup_check)"
+PS1+="\[${gitPrompt}\]\$(__git_ps1 '(%s)')"
+PS1+="\[\e[36m\](\w)"
+PS1+="\[\e[36;2m\]\$(print_dirs)"
+PS1+="\[${reset}\]"
+PS1+="\n> "
+
+export PS1
 # Adds script for git autocomplete
 source ~/git-completion.bash
 
