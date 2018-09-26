@@ -250,6 +250,11 @@ mkpcd()
 		pcd "$1"
 }
 
+# clear with dirs -c
+pclear()
+{
+	dirs -c
+}
 
 
 # Open safari window and start jupyter notebook kernel 
