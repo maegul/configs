@@ -3,6 +3,7 @@
 export EDITOR=vim
 export PATH="$(/Users/errollloyd/.dotfiles/custom_path.sh)"
 
+set -o vi
 # added by Anaconda 1.8.0 installer
 # export PATH="/Users/errollloyd/anaconda/bin:$PATH"
 
