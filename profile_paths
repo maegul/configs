@@ -8,6 +8,9 @@
 # brew binaries
 /usr/local/bin
 
+# Personal thingys more associated with my bash profile and trivial custom things
+/Users/errollloyd/.dotfiles
+
 # NEURON ... bless its heart
 /Applications/NEURON-7.4/nrn/x86_64/bin
 
