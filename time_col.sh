@@ -1,6 +1,7 @@
 # goes through cols in ANSI_cols_by_hue, prints a space for each, and makrs current time
 # relies on the date_cols script in dot files and the ANSI_cols_by_hue file
 
+# this script is in the path
 source date_cols_test.sh
 
 cols=$(cat ~/.dotfiles/ANSI_cols_by_hue)

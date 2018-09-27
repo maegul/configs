@@ -1,6 +1,8 @@
 # takes time of day now, converts to number relative to the the number of col numbers in ANSI_cols_by_hue
 # Intention is that it is used by bash_profile in prompt to colour an element by the time of day
 # ANSI_cols_by_hue was derived by finding all the ANSI 256 colours that have 100 sat and 50 l in HSL and sorting by hue.
+col_file=~/.dotfiles/ANSI_cols_by_hue
+
 raw_date_fmt="%Y%m%d"
 raw_date_time_fmt="%Y%m%d%H%M%S"
 sec_fmt="%s"
@@ -18,12 +20,12 @@ date_col_parse()
 
 	secs_start=$(date -j -f ${raw_date_time_fmt} $date_start +"%s")
 
-	day_in_inc=$(printf "%0.0f" $(echo "($secs_now-$secs_start)*($conv_fact)+1" | bc) )
+	day_in_inc=$(printf "%0.0f" $(echo "(($secs_now-$secs_start)*($conv_fact))+1" | bc) )
 
 	# echo $day_in_inc
 
 	# Sed and print line from file
-	echo $(sed -n "${day_in_inc}p" ~/.dotfiles/ANSI_cols_by_hue)
+	echo $(sed -n "${day_in_inc}p" $col_file)
 	# echo "$date_start"
 
 
