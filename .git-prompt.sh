@@ -35,6 +35,32 @@
 #
 # The prompt status always includes the current branch name.
 #
+#####
+# Personal changes to symbols being used
+#####
+#
+# Defaults
+#
+# sym_untracked="%"
+# sym_unstaged="*"
+# sym_staged="+"
+# sym_stashed="$"
+# sym_ahead_upstream=">"
+# sym_behind_upstream="<"
+# sym_equal_upstream="="
+# sym_diverged_upstream="<>"
+#
+# Custom
+#
+sym_untracked=$(echo -e "\xce\x9e")
+sym_unstaged=$(echo -e "\xce\x94")
+sym_staged=$(echo -e "\xe0\xa4\x95")
+sym_stashed=$(echo -e "\xe0\xa4\xb7")
+sym_ahead_upstream=$(echo -e "\xf0\x9f\x9c\x81")
+sym_behind_upstream=$(echo -e "\xf0\x9f\x9c\x83")
+sym_equal_upstream=$(echo -e "\xe2\xa8\x80")
+sym_diverged_upstream=$(echo -e "\xe2\xa8\x82")
+
 # In addition, if you set GIT_PS1_SHOWDIRTYSTATE to a nonempty value,
 # unstaged (*) and staged (+) changes will be shown next to the branch
 # name.  You can configure this per-repository with the
@@ -195,13 +221,13 @@ __git_ps1_show_upstream ()
 		"") # no upstream
 			p="" ;;
 		"0	0") # equal to upstream
-			p="=" ;;
+			p="$sym_equal_upstream" ;;
 		"0	"*) # ahead of upstream
-			p=">" ;;
+			p="$sym_ahead_upstream" ;;
 		*"	0") # behind upstream
-			p="<" ;;
+			p="$sym_behind_upstream" ;;
 		*)	    # diverged from upstream
-			p="<>" ;;
+			p="$sym_diverged_upstream" ;;
 		esac
 	else
 		case "$count" in
@@ -480,8 +506,8 @@ __git_ps1 ()
 		if [ -n "${GIT_PS1_SHOWDIRTYSTATE-}" ] &&
 		   [ "$(git config --bool bash.showDirtyState)" != "false" ]
 		then
-			git diff --no-ext-diff --quiet || w="*"
-			git diff --no-ext-diff --cached --quiet || i="+"
+			git diff --no-ext-diff --quiet || w="$sym_unstaged"
+			git diff --no-ext-diff --cached --quiet || i="$sym_staged"
 			if [ -z "$short_sha" ] && [ -z "$i" ]; then
 				i="#"
 			fi
@@ -489,14 +515,14 @@ __git_ps1 ()
 		if [ -n "${GIT_PS1_SHOWSTASHSTATE-}" ] &&
 		   git rev-parse --verify --quiet refs/stash >/dev/null
 		then
-			s="$"
+			s="${sym_stashed}"
 		fi
 
 		if [ -n "${GIT_PS1_SHOWUNTRACKEDFILES-}" ] &&
 		   [ "$(git config --bool bash.showUntrackedFiles)" != "false" ] &&
 		   git ls-files --others --exclude-standard --directory --no-empty-directory --error-unmatch -- ':/*' >/dev/null 2>/dev/null
 		then
-			u="%${ZSH_VERSION+%}"
+			u="${sym_untracked}${ZSH_VERSION+%}"
 		fi
 
 		if [ -n "${GIT_PS1_SHOWUPSTREAM-}" ]; then
@@ -517,7 +543,8 @@ __git_ps1 ()
 		b="\${__git_ps1_branch_name}"
 	fi
 
-	local f="$w$i$s$u"
+	# local f="$w$i$s$u"
+	local f="$u$w$i$s"
 	local gitstring="$c$b${f:+$z$f}$r$p"
 
 	if [ $pcmode = yes ]; then
