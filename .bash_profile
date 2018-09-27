@@ -36,7 +36,7 @@ bind '"\e[1;3D": backward-word'
 
 # USing git-prompt (semi-official)
 
-source ~/.git-prompt.sh
+source ~/.dotfiles/.git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWSTASHSTATE=1
@@ -115,7 +115,7 @@ PS1+="\n> "
 
 export PS1
 # Adds script for git autocomplete
-source ~/git-completion.bash
+source ~/.dotfiles/.git-completion.bash
 
 
 #Old custom git prompt
