@@ -69,11 +69,19 @@ print_backup_check()
 # For converting current time to col idx from file
 source ~/.dotfiles/date_cols_test.sh
 # unicode for a filled sun symbol
+
 time_sun_symbol="\xe2\x98\x80"
+time_moon_symbol="\xe2\x98\xbe"
 
 print_time_symbol()
 {
-	echo -e "$(tput setaf $(date_col_parse))${time_sun_symbol} $(tput sgr0)"
+	date_now=$(date +"%H")
+	if [[ $date_now > 21 && $date_now < 5 ]]; then
+		time_symbol=$time_moon_symbol
+	else
+		time_symbol=$time_sun_symbol
+	fi
+	echo -e "$(tput setaf $(date_col_parse))${time_symbol} $(tput sgr0)"
 }
 
 # Converts RGB coords (6x6x6) to ASNI color code
