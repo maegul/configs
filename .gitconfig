@@ -1,0 +1,32 @@
+[user]
+	name = Errol Lloyd
+	email = errolkjlloyd@gmail.com
+[color]
+	ui = auto
+[core]
+#	editor = vim
+	editor = subl -n -w
+	excludesfile = /Users/errollloyd/.gitignore_global
+	ui = auto
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[alias]
+	root = rev-parse --show-toplevel
+	lg = log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short
+	lga = log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short --all --graph
+	alias = config --global --get-regexp alias
+	qlog = log --oneline --stat -n 3
+	
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[diff]
+	tool = vimdiff
+[commit]
+	template = /Users/errollloyd/.stCommitMsg
