@@ -52,14 +52,15 @@
 #
 # Custom
 #
-sym_untracked=$(echo -e "\xce\x9e")
-sym_unstaged=$(echo -e "\xce\x94")
-sym_staged=$(echo -e "\xe0\xa4\x95")
-sym_stashed=$(echo -e "\xe0\xa4\xb7")
-sym_ahead_upstream=$(echo -e "\xf0\x9f\x9c\x81")
-sym_behind_upstream=$(echo -e "\xf0\x9f\x9c\x83")
-sym_equal_upstream=$(echo -e "\xe2\xa8\x80")
-sym_diverged_upstream=$(echo -e "\xe2\xa8\x82")
+
+sym_untracked=$(echo -e "\xce\x9e") # XI for x in greek
+sym_unstaged=$(echo -e "\xce\x94") # DELTA for change in greek
+sym_staged=$(echo -e "\xe0\xa4\x95") # KA for commit in devanagari
+sym_stashed=$(echo -e "\xe0\xa4\xb7") # SA for stash in devanagari
+sym_ahead_upstream=$(echo -e "\xf0\x9f\x9c\x81") # AIR in alchemy for push to cloud
+sym_behind_upstream=$(echo -e "\xf0\x9f\x9c\x83") # EARTH in alchemy for pull down from cloud
+sym_equal_upstream=$(echo -e "\xe2\xa8\x80") # Sun, circle, everything is centered??
+sym_diverged_upstream=$(echo -e "\xe2\xa8\x82") # Cross for divergence
 
 # In addition, if you set GIT_PS1_SHOWDIRTYSTATE to a nonempty value,
 # unstaged (*) and staged (+) changes will be shown next to the branch
