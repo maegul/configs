@@ -49,6 +49,7 @@
 # sym_behind_upstream="<"
 # sym_equal_upstream="="
 # sym_diverged_upstream="<>"
+# sym_init_commit="#"
 #
 # Custom
 #
@@ -61,6 +62,7 @@ sym_ahead_upstream=$(echo -e "\xf0\x9f\x9c\x81") # AIR in alchemy for push to cl
 sym_behind_upstream=$(echo -e "\xf0\x9f\x9c\x83") # EARTH in alchemy for pull down from cloud
 sym_equal_upstream=$(echo -e "\xe2\xa8\x80") # Sun, circle, everything is centered??
 sym_diverged_upstream=$(echo -e "\xe2\xa8\x82") # Cross for divergence
+sym_init_commit=$(echo -e "\xe0\xa4\x8f")
 
 # In addition, if you set GIT_PS1_SHOWDIRTYSTATE to a nonempty value,
 # unstaged (*) and staged (+) changes will be shown next to the branch
@@ -510,7 +512,7 @@ __git_ps1 ()
 			git diff --no-ext-diff --quiet || w="$sym_unstaged"
 			git diff --no-ext-diff --cached --quiet || i="$sym_staged"
 			if [ -z "$short_sha" ] && [ -z "$i" ]; then
-				i="#"
+				i="$sym_init_commit"
 			fi
 		fi
 		if [ -n "${GIT_PS1_SHOWSTASHSTATE-}" ] &&
