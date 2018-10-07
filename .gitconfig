@@ -14,11 +14,13 @@
 	process = git-lfs filter-process
 	required = true
 [alias]
+	st = status --porcelain
 	root = rev-parse --show-toplevel
 	lg = log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short
 	lga = log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short --all --graph
-	alias = config --global --get-regexp alias
-	qlog = log --oneline --stat -n 3
+	aliases = config --global --get-regexp alias
+	alias = "!sh -c 'git config --global alias.\"$1\" \"$2\"' -"
+	qc = commit -a -m 'whatever, get it done'
 	
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"

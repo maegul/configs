@@ -76,6 +76,7 @@ vmap jj <Esc>
 let mapleader=','
 
 set nu
+set relativenumber
 
 " bracket highlight when completed
 set showmatch
