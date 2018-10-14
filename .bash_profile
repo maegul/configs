@@ -76,7 +76,7 @@ time_moon_symbol="\xe2\x98\xbe"
 print_time_symbol()
 {
 	date_now=$(date +"%H")
-	if [[ $date_now > 21 && $date_now < 5 ]]; then
+	if [[ $date_now > 20 && $date_now < 5 ]]; then
 		time_symbol=$time_moon_symbol
 	else
 		time_symbol=$time_sun_symbol
