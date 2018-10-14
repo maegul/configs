@@ -54,15 +54,25 @@
 # Custom
 #
 
-sym_untracked=$(echo -e "\xce\x9e") # XI for x in greek
-sym_unstaged=$(echo -e "\xce\x94") # DELTA for change in greek
-sym_staged=$(echo -e "\xe0\xa4\x95") # KA for commit in devanagari
-sym_stashed=$(echo -e "\xe0\xa4\xb7") # SA for stash in devanagari
-sym_ahead_upstream=$(echo -e "\xf0\x9f\x9c\x81") # AIR in alchemy for push to cloud
-sym_behind_upstream=$(echo -e "\xf0\x9f\x9c\x83") # EARTH in alchemy for pull down from cloud
-sym_equal_upstream=$(echo -e "\xe2\xa8\x80") # Sun, circle, everything is centered??
-sym_diverged_upstream=$(echo -e "\xe2\xa8\x82") # Cross for divergence
-sym_init_commit=$(echo -e "\xe0\xa4\x8f")
+# sym_untracked=$(echo -e "\xce\x9e") # XI for x in greek
+# sym_unstaged=$(echo -e "\xce\x94") # DELTA for change in greek
+# sym_staged=$(echo -e "\xe0\xa4\x95") # KA for commit in devanagari
+# sym_stashed=$(echo -e "\xe0\xa4\xb7") # SA for stash in devanagari
+# sym_ahead_upstream=$(echo -e "\xf0\x9f\x9c\x81") # AIR in alchemy for push to cloud
+# sym_behind_upstream=$(echo -e "\xf0\x9f\x9c\x83") # EARTH in alchemy for pull down from cloud
+# sym_equal_upstream=$(echo -e "\xe2\xa8\x80") # Sun, circle, everything is centered??
+# sym_diverged_upstream=$(echo -e "\xe2\xa8\x82") # Cross for divergence
+# sym_init_commit=$(echo -e "\xe0\xa4\x8f")sym_untracked=$(echo -e "\xce\x9e") # XI for x in greek
+
+sym_untracked=$(echo -e "\xf0\x9f\x95\xb8]x20") # Spider web
+sym_unstaged=$(echo -e "\xf0\x9f\x90\x9b\x20") # Caterpiller for new comings
+sym_staged=$(echo -e "\xf0\x9f\xa6\x8b\x20") # Butterfly for new life ready to fly away
+sym_stashed=$(echo -e "\xf0\x9f\x92\xb0\x20") # dollar bag for my stash
+sym_ahead_upstream=$(echo -e "\xf0\x9f\x8c\x8f\x20") # Earth for new things are on the ground
+sym_behind_upstream=$(echo -e "\xf0\x9f\x8c\xa7\x20") # Raining cloud for a pull and merge to come
+sym_equal_upstream=$(echo -e "\xf0\x9f\x8c\x88\x20") # Rainbow for everything is good
+sym_diverged_upstream=$(echo -e "\xf0\x9f\x92\xa9\x20") # Shit show for it is now a shit show
+sym_init_commit=$(echo -e "\xf0\x9f\x8d\x84\x20") # Mushroom for all the new files or spores to be added
 
 # In addition, if you set GIT_PS1_SHOWDIRTYSTATE to a nonempty value,
 # unstaged (*) and staged (+) changes will be shown next to the branch
