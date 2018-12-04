@@ -69,8 +69,11 @@ filetype plugin indent on    " required
 
 
 " Escape substitutes
+
 imap jj <Esc>
+imap kj <Esc>
 vmap jj <Esc>
+vmap kj <Esc>
 
 
 let mapleader=','
@@ -128,6 +131,7 @@ let g:airline#extensions#default#section_truncate_width = {
 
 
 syntax on
+set background=dark
 
 let python_highlight_all = 1
 
