@@ -70,7 +70,8 @@ sym_staged=$(echo -e "\xf0\x9f\xa6\x8b\x20") # Butterfly for new life ready to f
 sym_stashed=$(echo -e "\xf0\x9f\x92\xb0\x20") # dollar bag for my stash
 sym_ahead_upstream=$(echo -e "\xf0\x9f\x8c\x8f\x20") # Earth for new things are on the ground
 sym_behind_upstream=$(echo -e "\xf0\x9f\x8c\xa7\x20") # Raining cloud for a pull and merge to come
-sym_equal_upstream=$(echo -e "\xf0\x9f\x8c\x88\x20") # Rainbow for everything is good
+sym_equal_upstream=$(echo -e "🌈 ") # Rainbow for everything is good
+# sym_equal_upstream=$(echo -e "\xf0\x9f\x8c\x88\x20") # Rainbow for everything is good
 sym_diverged_upstream=$(echo -e "\xf0\x9f\x92\xa9\x20") # Shit show for it is now a shit show
 sym_init_commit=$(echo -e "\xf0\x9f\x8d\x84\x20") # Mushroom for all the new files or spores to be added
 

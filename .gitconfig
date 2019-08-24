@@ -16,12 +16,15 @@
 [alias]
 	st = status --porcelain
 	root = rev-parse --show-toplevel
-	lg = log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short
-	lga = log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short --all --graph
+	lg = log --pretty=format:'%C(yellow)%h %Cred%ad %C(90)%an%Cgreen%d %Creset%s' --date=short
+	lga = log --pretty=format:'%C(yellow)%h %Cred%ad %C(90)%an%Cgreen%d %Creset%s' --date=short --all --graph
 	aliases = config --global --get-regexp alias
 	alias = "!sh -c 'git config --global alias.\"$1\" \"$2\"' -"
 	qc = commit -a -m 'whatever, get it done'
-	
+	# Add word diff highlighting to interactive and patch adding
+	addwp = -c interactive.diffFilter=\"git diff --color-words\" add -p
+	addwi = -c interactive.diffFilter=\"git diff --color-words\" add -i
+	diffw = diff --word-diff=color	
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 

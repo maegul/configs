@@ -72,8 +72,6 @@ filetype plugin indent on    " required
 
 imap jj <Esc>
 imap kj <Esc>
-vmap jj <Esc>
-vmap kj <Esc>
 
 
 let mapleader=','
