@@ -3,9 +3,12 @@
 export EDITOR=vim
 export PATH="$(/Users/errollloyd/.dotfiles/custom_path.sh)"
 
+# vi mode for bash
 set -o vi
-# added by Anaconda 1.8.0 installer
-# export PATH="/Users/errollloyd/anaconda/bin:$PATH"
+# bind escape to k+j
+bind '"kj":"\e"'
+
+
 
 # export PATH=$PATH:~/abin
 
@@ -27,6 +30,10 @@ bind '"\e[1;3D": backward-word'
 # Prompt
 ###
 
+# Checking if interactive, to prepare prompt only for interactive
+# Using .bash_profile and .bashrc more appropriately may make this cleaner
+if [[ $- == *i* ]]
+then
 
 # Edits prompt
 
@@ -44,8 +51,9 @@ GIT_PS1_SHOWSTASHSTATE=1
 GIT_PS1_SHOWCOLORHINTS=1
 GIT_PS1_SHOWUPSTREAM="auto"
 
+###
 # prompt
-# export PS1="\n(\!)-(\[\e[31m\]\u\[\e[0m\])\n(\[\e[36m\]\w\[\e[0m\])\[\e[35m\]\$(__git_ps1 '(%s)')\[\e[0m\]\n> "
+###
 
 # addings a pushd dirs to prompt when more than one in stack
 print_dirs(){ 
@@ -63,8 +71,15 @@ print_backup_check()
 	fi
 }
 
-# export PS1="\n(\[${hist_number}\]\[${hist_numberBG}\]\!\[${reset}\])-(\[\e[31m\]\u\[\e[0m\])(\[\e[38;5;208m\]\$(backup_since)\[\e[0m\])\n(\[\e[36m\]\w\[\e[0m\])\[\e[35m\]\$(__git_ps1 '(%s)')\[\e[36;2m\]\$(print_dirs)\[\e[0m\]\[\e[0m\]\n> "
-# export PS1="\n(\[${hist_number}\]\[${hist_numberBG}\]\!\[${reset}\])-(\[\e[31m\]\u\[\e[0m\])(\[\e[38;5;208m\]\$(backup_since)\[\e[0m\])\n(\[\e[36m\]\w\[\e[0m\])\[\e[35m\]\$(__git_ps1 '(%s)')\[\e[36;2m\]\$(print_dirs)\[\e[0m\]\[\e[0m\]\n> "
+# check if in conda env, if so return (env)
+# used instead of default conda prompt change
+# turned off with conda config --set changeps1 false
+print_conda_env()
+{
+	if [ -n "$CONDA_DEFAULT_ENV" ]; then
+		echo "($CONDA_DEFAULT_ENV)"
+	fi
+}
 
 # For converting current time to col idx from file
 source ~/.dotfiles/date_cols_test.sh
@@ -89,6 +104,9 @@ function RGBcolor {
     echo "16 + $1 * 36 + $2 * 6 + $3" | bc                        
 } 
 
+# Checking if interactive, for tput assignments
+
+
 # Predefined colors
 reset=$(tput sgr0)
 bold=$(tput bold)
@@ -97,6 +115,7 @@ rev=$(tput rev)
 # hist_number=$(tput setaf 213)
 col_BUTime=$(tput setaf 208)
 gitPrompt=$(tput setaf $(RGBcolor 3 0 3) )
+condaEnvCol=$(tput setaf $(RGBcolor 0 4 1))
 
 # Converts time of day to col from 30 cols in ANSI_cols_by_hue
 
@@ -107,6 +126,8 @@ PS1+="\$(print_time_symbol)"
 PS1+="\[${bold}\]"
 # PS1+="\[${rev}\]"
 PS1+="\[${col_BUTime}\]\$(print_backup_check)"
+PS1+="\[${condaEnvCol}\]\$(print_conda_env)"
+PS1+="\n"
 PS1+="\[${gitPrompt}\]\$(__git_ps1 '(%s)')"
 PS1+="\[\e[36m\](\w)"
 PS1+="\[\e[36;2m\]\$(print_dirs)"
@@ -122,6 +143,9 @@ source ~/.dotfiles/.git-completion.bash
 #parse_git_branch(){ git branch 2>/dev/null | grep '^*' | colrm 1 2;}
 
 #export PS1="\n(\!)-(\[\e[31m\]\u\[\e[0m\])\n(\[\e[36m\]\w\[\e[0m\])-(\[\e[35m\]\$(parse_git_branch)\[\e[0m\])\n> "
+
+
+fi
 
 
 # Change terminal colors
@@ -170,14 +194,18 @@ shopt -s histappend
 
 # Some alias play ... yay!
 alias ll='ls -haltF'
+# CLICOLOR_FORCE for BSD/MAC to force ls to provide color chars in output to non terminal
+# alias lls='CLICOLOR_FORCE= ll | less -R'
 
-# git aliases
-alias git_mylog="git log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short"
+alias cl='clear'
+alias bpe='vim ~/.bash_profile'
 
-alias git_mylog_graph='git log --oneline --graph'
 
-# python web server
-alias py_serve='python -m SimpleHTTPServer'
+
+# python web server (py 2)
+# alias py_serve='python -m SimpleHTTPServer'
+# python 3 version
+alias py_serve='python -m http.server'
 
 # spartan SSH
 alias spartan_ssh='ssh errol@spartan.hpc.unimelb.edu.au'
@@ -193,6 +221,7 @@ alias mac_pro_ssh='ssh Errol@errol-mac-pro.mobility.unimelb.net.au'
 
 alias mac_pro_hal_ssh='ssh Hal@errol-mac-pro.mobility.unimelb.net.au'
 
+alias aryabhat_ssh='ssh Aryabhat@10.100.132.149'
 
 # matlab no desktop alias
 
@@ -225,7 +254,37 @@ alias tm_kill="tmux kill-session -t"
 ## Go to User folder of current sublime text install
 alias goto_sublime_user='cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User'
 
+alias goto_lenTun_data='cd /Volumes/MagellanX/PhD/Data/length_tun_data/'
+alias goto_proj_notes='cd ~/Dropbox/Science/PhD/project_notes'
 
+# alias for quick debug
+alias qlldb='lldb --batch -o run -o bt -o q'
+
+lls() {
+	CLICOLOR_FORCE= ls -haltF $1 | less -R
+}
+
+## Current transitioning conda env to python 3 ... quickly source
+
+# transition complete(?)
+# alias pynew='source activate n3w'
+
+# pandoc function to convert markdown to docx of same filename
+md2doc() {
+	file=$1
+	pandoc $file -o "${file%.*}.docx"
+}
+
+# Clones and then forks a GitHub repo
+# Relies on hub and ack for regex
+fork_gh() {
+	regex='([\w\d]+).git$'
+	repo_dir="$(echo $1 | ack $regex --output '$1')"
+	# echo $repo_dir
+	git clone $1
+	cd $repo_dir
+	hub fork
+}
 
 # for viewing man pages in vim
 vman() {
@@ -291,4 +350,20 @@ function jnb {
 	done
 
 }
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/errollloyd/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/errollloyd/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/errollloyd/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/errollloyd/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 

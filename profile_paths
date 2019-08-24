@@ -1,6 +1,10 @@
 
 # so anaconda python precedes brew python
-/Users/errollloyd/anaconda/bin
+# this may have problems, which I didnt foresee ... 
+# ... there are other binaries installed in anaconda that collide with /usr/bin, /usr/local/bin etc
+# better way to make anaconda python? aliases? pyenv?
+# /Users/errollloyd/anaconda/bin
+# conda has automatic init shell script (see bottom of bash_profile), problem still exists however
 
 # personal binaries
 /Users/errollloyd/bin
