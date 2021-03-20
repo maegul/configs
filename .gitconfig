@@ -8,6 +8,8 @@
 	editor = subl -n -w
 	excludesfile = /Users/errollloyd/.gitignore_global
 	ui = auto
+#	delta requires 24bit color terminal ... ugh (installed with brew)
+#	pager = delta --light
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -24,10 +26,10 @@
 	# Add word diff highlighting to interactive and patch adding
 	addwp = -c interactive.diffFilter=\"git diff --color-words\" add -p
 	addwi = -c interactive.diffFilter=\"git diff --color-words\" add -i
-	diffw = diff --word-diff=color	
+	diffw = diff --word-diff=color
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true

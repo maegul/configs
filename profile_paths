@@ -6,7 +6,7 @@
 # /Users/errollloyd/anaconda/bin
 # conda has automatic init shell script (see bottom of bash_profile), problem still exists however
 
-# personal binaries
+# personal scripts/binaries
 /Users/errollloyd/bin
 
 # brew binaries
@@ -14,6 +14,9 @@
 
 # Personal thingys more associated with my bash profile and trivial custom things
 /Users/errollloyd/.dotfiles
+
+# sublime text command line
+/Applications/Sublime Text 4.app/Contents/SharedSupport/bin
 
 # NEURON ... bless its heart
 /Applications/NEURON-7.4/nrn/x86_64/bin
