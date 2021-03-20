@@ -1,0 +1,1 @@
+alias emb from IPython import embed; embed()
