@@ -7,7 +7,7 @@ export PATH="$(/Users/errollloyd/.dotfiles/custom_path.sh)"
 # vi mode for bash
 set -o vi
 # bind escape to k+j
-bind '"kj":"\e"'
+# bind '"kj":"\e"'
 
 # allow forward search with reverse search (C-R)
 stty -ixon
@@ -343,6 +343,7 @@ alias aryabhat_ssh='ssh Aryabhat@10.100.132.149'
 alias aws_free_ssh='ssh -i ~/.ssh/id_rsa ubuntu@ec2-13-55-125-43.ap-southeast-2.compute.amazonaws.com'
 alias aws_large_ssh='ssh -i ~/.ssh/id_rsa ubuntu@ec2-13-236-177-188.ap-southeast-2.compute.amazonaws.com'
 
+alias ssh_hosts="grep 'Host \S' ~/.ssh/config | cut -c 6-"
 
 # project notes todo check
 alias todo='/Users/errollloyd/Dropbox/Science/PhD/project_notes/todo_check.sh'
@@ -381,6 +382,9 @@ alias tm_kill="tmux kill-session -t"
 # Misc Aliases
 
 # sublime text
+
+alias sublime_press_hold_on='defaults write com.sublimetext.4 ApplePressAndHoldEnabled -bool false'
+alias sublime_press_hold_off='defaults write com.sublimetext.4 ApplePressAndHoldEnabled -bool true'
 
 ## Go to User folder of current sublime text install
 alias goto_sublime_user='cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User'
@@ -423,10 +427,14 @@ alias aws_copy_ip='export awsinst=$(pbpaste)'
 alias aws_qcon='ssh ubuntu@$(pbpaste)'
 alias aws_con='ssh ubuntu@$awsinst'
 
+# assumes default profile is pythoncharmers
+alias aws_list_running_ec2="aws ec2 describe-instances --query \"Reservations[*].Instances[*].{public_ip:PublicIpAddress,priv_ip:PrivateIpAddress,Name:Tags[?Key=='Name']|[0].Value,Status:State.Name}\" --output table --filters \"Name=instance-state-name,Values=running\""
+
+
 # requires aws CLI configured for users
 # also depends on jq
 
-alias aws_li="aws ec2 describe-instances --profile maegul | jq '.Reservations | .[] | .Instances | .[] | {type: .InstanceType, id: .InstanceId, state: .State.Name, tags: .Tags}'"
+alias aws_li="aws ec2 describe-instances | jq '.Reservations | .[] | .Instances | .[] | {type: .InstanceType, id: .InstanceId, state: .State.Name, tags: .Tags}'"
 
 alias aws_start="aws ec2 start-instances --profile maegul --instance-ids"
 alias aws_stop="aws ec2 stop-instances --profile maegul --instance-ids"
@@ -627,7 +635,29 @@ export PATH=$PATH:~/.kube/plugins/jordanwilson230
 export PATH="${PATH}:${HOME}/.krew/bin"
 
 test_func(){
-	"$@"
+	echo $1
+}
+
+kb_context(){
+	kubectl config current-context
+}
+
+kb_context_list_all(){
+	# awkwardly, the first column is empty when not current, so first column is col name for not current
+	kubectl config get-contexts | tail -n +2 | awk '{print ($1 == "*" ? FNR "-> " $2 : FNR "   " $1)}'
+}
+
+kb_context_get(){
+	# awkwardly, the first column is empty when not current, so first column is col name for not current
+	kubectl config get-contexts | tail -n +2 | awk -v x=$1 'FNR == x {print ($1 == "*" ? $2 : $1 )}'
+}
+
+kb_context_cp(){
+	kb_context_get $1 | tr -d '\n'| pbcopy
+}
+
+kb_context_set(){
+	kubectl config use-context $(kb_context_get $1)
 }
 
 # scale number of replicas to input (~ number of participants)
@@ -668,7 +698,7 @@ kb_get_pod_shell_root(){
 
 # run command on all pods
 kb_com_all_pods(){
-	kubectl get pod -n jhub | awk '/jupyter/ {print $1}' | parallel -I {} kubectl exec -it -c notebook -n jhub {} -- $@
+	kubectl get pod -n jhub | awk '/jupyter/ {print $1}' | parallel -I {} kubectl exec -it -c notebook -n jhub {} -- bash -c "$@"
 }
 
 # run command as root on all pods
