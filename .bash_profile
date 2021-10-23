@@ -37,6 +37,8 @@ complete -C '/usr/local/bin/aws_completer' aws
 # > pythonpath
 # Adds my personal script library to pythonpath
 export PYTHONPATH=${PYTHONPATH}:~/Dropbox/Science/scripts/
+export PYTHONPATH=${PYTHONPATH}:~/Developer/zekell/zekell_sqlite/
+
 
 # For terminus in sublime text
 bind '"\e[1;3C": forward-word'
