@@ -271,6 +271,9 @@ shopt -s histappend
 
 # > Aliases
 
+# >> zekell
+alias zkl='/Users/errollloyd/Developer/zekell/zekell_sqlite/zekell.py'
+
 # Some alias play ... yay!
 
 # >> File management ls / exa
