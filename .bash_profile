@@ -301,6 +301,23 @@ alias tree='tree -A'
 alias cl='clear'
 
 
+# >> Diffs
+
+alias gdiff='git diff --no-index --word-diff=color -w'
+# alias fulldiff='colordiff -y -W 200 --left-column'
+
+fulldiff() {
+	# provide width as third argument!
+	colordiff -y -W ${3:-200} --left-column $1 $2 | less -R
+}
+fulldiff_q() {
+	# provide width as third argument!
+	colordiff -y -W ${3:-200} --suppress-common-lines $1 $2 | less -R
+}
+
+
+
+
 # >> Network
 
 # list listening ports on local host
