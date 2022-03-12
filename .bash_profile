@@ -44,6 +44,9 @@ export PYTHONPATH=${PYTHONPATH}:~/Developer/zekell/zekell_sqlite/
 bind '"\e[1;3C": forward-word'
 bind '"\e[1;3D": backward-word'
 
+# > AWS Default (name) profile
+# profile should be defined in ~/.aws
+export AWS_DEFAULT_PROFILE=maegul_user
 
 ###
 # > Prompt
