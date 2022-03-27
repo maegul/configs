@@ -685,6 +685,11 @@ kb_context_set(){
 	kubectl config use-context $(kb_context_get $1)
 }
 
+# set current context to use the provided namespace as default
+kb_context_default_namespace(){
+  kubectl config set-context --current --namespace=$1
+}
+
 # scale number of replicas to input (~ number of participants)
 kb_scale_replicas(){
 	kubectl scale -n jhub statefulsets/user-placeholder --replicas=$1
