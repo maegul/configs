@@ -663,79 +663,79 @@ test_func(){
 	echo $1
 }
 
-kb_context(){
-	kubectl config current-context
-}
+# kb_context(){
+# 	kubectl config current-context
+# }
 
-kb_context_list_all(){
-	# awkwardly, the first column is empty when not current, so first column is col name for not current
-	kubectl config get-contexts | tail -n +2 | awk '{print ($1 == "*" ? FNR "-> " $2 : FNR "   " $1)}'
-}
+# kb_context_list_all(){
+# 	# awkwardly, the first column is empty when not current, so first column is col name for not current
+# 	kubectl config get-contexts | tail -n +2 | awk '{print ($1 == "*" ? FNR "-> " $2 : FNR "   " $1)}'
+# }
 
-kb_context_get(){
-	# awkwardly, the first column is empty when not current, so first column is col name for not current
-	kubectl config get-contexts | tail -n +2 | awk -v x=$1 'FNR == x {print ($1 == "*" ? $2 : $1 )}'
-}
+# kb_context_get(){
+# 	# awkwardly, the first column is empty when not current, so first column is col name for not current
+# 	kubectl config get-contexts | tail -n +2 | awk -v x=$1 'FNR == x {print ($1 == "*" ? $2 : $1 )}'
+# }
 
-kb_context_cp(){
-	kb_context_get $1 | tr -d '\n'| pbcopy
-}
+# kb_context_cp(){
+# 	kb_context_get $1 | tr -d '\n'| pbcopy
+# }
 
-kb_context_set(){
-	kubectl config use-context $(kb_context_get $1)
-}
+# kb_context_set(){
+# 	kubectl config use-context $(kb_context_get $1)
+# }
 
-# set current context to use the provided namespace as default
-kb_context_default_namespace(){
-  kubectl config set-context --current --namespace=$1
-}
+# # set current context to use the provided namespace as default
+# kb_context_default_namespace(){
+#   kubectl config set-context --current --namespace=$1
+# }
 
-# scale number of replicas to input (~ number of participants)
-kb_scale_replicas(){
-	kubectl scale -n jhub statefulsets/user-placeholder --replicas=$1
-}
+# # scale number of replicas to input (~ number of participants)
+# kb_scale_replicas(){
+# 	kubectl scale -n jhub statefulsets/user-placeholder --replicas=$1
+# }
 
-# sort by ip address
-kb_list_all_pods(){
-	kubectl get pod -n jhub -o wide | awk 'NR>1{ print $1, $7, $5}' | sort -k 2 | rs _ 3
-}
+# # sort by ip address
+# kb_list_all_pods(){
+# 	kubectl get pod -n jhub -o wide | awk 'NR>1{ print $1, $7, $5}' | sort -k 2 | rs _ 3
+# }
 
-# sort by ip address
-kb_list_all_jupyter_pods(){
-	kubectl get pod -n jhub -o wide | awk '/jupyter/ NR>1{ print $1, $7, $5}' | sort -k 2 | rs _ 3
-}
+# # sort by ip address
+# kb_list_all_jupyter_pods(){
+# 	kubectl get pod -n jhub -o wide | awk '/jupyter/ NR>1{ print $1, $7, $5}' | sort -k 2 | rs _ 3
+# }
 
-# searches pod names for provided string as 'jupyter-.*STRING.*'
-kb_find_pod_name(){
-	# kubectl get pods | awk -v nm="$1" '/jupyter-.*nm.*/ {print $1}'
-	kubectl get pods -n jhub | awk -v nm="jupyter-.*$1.*" '$1 ~ nm {print $1}'
-}
+# # searches pod names for provided string as 'jupyter-.*STRING.*'
+# kb_find_pod_name(){
+# 	# kubectl get pods | awk -v nm="$1" '/jupyter-.*nm.*/ {print $1}'
+# 	kubectl get pods -n jhub | awk -v nm="jupyter-.*$1.*" '$1 ~ nm {print $1}'
+# }
 
-# opens bash terminal on pod provided
-kb_get_pod_shell(){
-	kubectl exec -it -c notebook -n jhub $1 -- /bin/bash
-}
+# # opens bash terminal on pod provided
+# kb_get_pod_shell(){
+# 	kubectl exec -it -c notebook -n jhub $1 -- /bin/bash
+# }
 
-# wrapper around find_pod_name and get_pod_shell
-kb_find_pod_shell(){
-	kb_get_pod_shell $(kb_find_pod_name $1)
-}
+# # wrapper around find_pod_name and get_pod_shell
+# kb_find_pod_shell(){
+# 	kb_get_pod_shell $(kb_find_pod_name $1)
+# }
 
-# get root shell
-kb_get_pod_shell_root(){
-	kubectl ssh -c notebook -n jhub $1 -- /bin/bash
-}
+# # get root shell
+# kb_get_pod_shell_root(){
+# 	kubectl ssh -c notebook -n jhub $1 -- /bin/bash
+# }
 
-# run command on all pods
-kb_com_all_pods(){
-	kubectl get pod -n jhub | awk '/jupyter/ {print $1}' | parallel -I {} kubectl exec -it -c notebook -n jhub {} -- bash -c "$@"
-}
+# # run command on all pods
+# kb_com_all_pods(){
+# 	kubectl get pod -n jhub | awk '/jupyter/ {print $1}' | parallel -I {} kubectl exec -it -c notebook -n jhub {} -- bash -c "$@"
+# }
 
-# run command as root on all pods
-kb_com_root_all_pods(){
-	kubectl get pod -n jhub | awk '/jupyter/ {print $1}' | parallel -I {} kubectl ssh -c notebook -n jhub {} -- $@
+# # run command as root on all pods
+# kb_com_root_all_pods(){
+# 	kubectl get pod -n jhub | awk '/jupyter/ {print $1}' | parallel -I {} kubectl ssh -c notebook -n jhub {} -- $@
 
-}
+# }
 
 ##
 # Your previous /Users/errollloyd/.bash_profile file was backed up as /Users/errollloyd/.bash_profile.macports-saved_2021-02-26_at_15:08:36
