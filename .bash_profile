@@ -284,10 +284,11 @@ alias zkl='/Users/errollloyd/Developer/zekell/zekell_sqlite/zekell.py'
 # alias ll='ls -haltF'
 # --icons (v>=0.9.0) relies on appropriate fonts
 # Currently installed through brew tap cask/homebrew-fonts ... hack-nerd-font and drois-sans-mono font
-alias ll='exa -laF -s=age --git --icons' # basic long form sorted by age (youngest fist)
-alias llt='exa -laF -s=type --git --icons' # sort by type
-alias lltr='exa -laF --tree --git --icons -I .git' # tree display, ignore .git folders
-alias llext='exa -laF -s=extension --git --icons' # sort by extension
+# "g" prints group ... maybe not that valuable on macOS home machine?
+alias ll='exa -laFg -s=age --git --icons' # basic long form sorted by age (youngest fist)
+alias llt='exa -laFg -s=type --git --icons' # sort by type
+alias lltr='exa -laFg --tree --git --icons -I .git' # tree display, ignore .git folders
+alias llext='exa -laFg -s=extension --git --icons' # sort by extension
 
 # ranger file, when sourced mangles bash to cd to current directory on exit
 # while also running ranger
