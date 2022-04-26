@@ -136,20 +136,39 @@ function RGBcolor {
 function RGBpalette(){
 
 	printf "
-	| *--> Blue
-	| |
-	| v Green
-	v
-	Red
+NNN -> RGB
+c = 16 + (R*36) + (G*6) + B
 
-	NNN -> RGB\n"
+| *--> Blue
+| |
+| v Green
+v
+Red\n"
 
-	for r in {0..5};
-		do for g in {0..5};
-			do for b in {0..5};
+	# min and max values
+	local Rm
+	local Gm
+	local Bm
+	local RM
+	local GM
+	local BM
+	local r
+	local g
+	local b
+
+	RM=${1:-5}
+	GM=${2:-5}
+	BM=${3:-5}
+	Rm=${4:-0}
+	Gm=${5:-0}
+	Bm=${6:-0}
+
+	for ((r=$Rm; r<=$RM; r++));
+		do for ((g=$Gm; g<=$GM; g++));
+			do for ((b=Gm; b<=$BM; b++));
 				do tput setaf $(RGBcolor $r $g $b) && tput rev;
 				msg="  $r$g$b  "
-				if [ $b == 5 ]; then
+				if [ $b == $BM ]; then
 					echo "$msg";
 				else
 					echo -n "$msg";
