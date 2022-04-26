@@ -126,10 +126,40 @@ print_time_symbol()
 	echo -e "$(tput setaf $(date_col_parse))${time_symbol} $(tput sgr0)"
 }
 
+# > tput and color
 # Converts RGB coords (6x6x6) to ASNI color code
 function RGBcolor {
     echo "16 + $1 * 36 + $2 * 6 + $3" | bc
 }
+
+# prints the full 6 value deep color palette
+function RGBpalette(){
+
+	printf "
+	| *--> Blue
+	| |
+	| v Green
+	v
+	Red
+
+	NNN -> RGB\n"
+
+	for r in {0..5};
+		do for g in {0..5};
+			do for b in {0..5};
+				do tput setaf $(RGBcolor $r $g $b) && tput rev;
+				msg="  $r$g$b  "
+				if [ $b == 5 ]; then
+					echo "$msg";
+				else
+					echo -n "$msg";
+				fi
+			done
+		done
+	done;
+	tput sgr0
+}
+
 
 
 # >> preddefined colours
