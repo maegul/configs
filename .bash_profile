@@ -390,10 +390,9 @@ alias bpsrc="source $USER_BASH_PROFILE_PATH"
 
 
 
-# python web server (py 2)
 # alias py_serve='python -m SimpleHTTPServer'
 # python 3 version
-alias py_serve='python -m http.server'
+alias py_serve='python3 -m http.server'
 
 
 # >> python test debug with ipython
