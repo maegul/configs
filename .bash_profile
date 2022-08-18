@@ -107,6 +107,22 @@ print_conda_env()
 	fi
 }
 
+# >> Ranger Level
+# if in a subshell from a ranger instance
+# retrieve the env "RANGER_LEVEL" (created by ranger, somehow)
+# print the number with minor formatting
+
+function ranger_level(){
+	# local lvl;
+	# lvl="$RANGER_LEVEL"
+	if [ "$RANGER_LEVEL" = "" ]; then
+		echo ""
+	else
+		echo "R$RANGER_LEVEL"
+	fi
+}
+
+
 # > time symbol
 # For converting current time to col idx from file
 source ~/.dotfiles/date_cols_test.sh
@@ -189,14 +205,18 @@ rev=$(tput rev)
 # hist_numberBG=$(tput setab 33)
 # hist_number=$(tput setaf 213)
 col_BUTime=$(tput setaf 208)
-gitPrompt=$(tput setaf $(RGBcolor 3 0 3) )
-condaEnvCol=$(tput setaf $(RGBcolor 0 4 1))
-
+gitPrompt=$(tput setaf "$(RGBcolor 3 0 3)" )
+condaEnvCol=$(tput setaf "$(RGBcolor 0 4 1)")
+ranger_lvl_Col=$(tput setaf "$(RGBcolor 3 2 3)")
 
 # >> Assembling Prompt
 PS1="\n"
 # PS1+="\$(echo -e '$(tput setaf $(date_col_parse))${time_sun_symbol}$(tput sgr0) ')"
 PS1+="\$(print_time_symbol)"
+# ranger level number ... make reversed to it looks different from all the other elements
+PS1+="\[${rev}\]"
+PS1+="\[${ranger_lvl_Col}\]\$(ranger_level)"
+PS1+="\[${reset}\]"
 PS1+="\[${bold}\]"
 # PS1+="\[${rev}\]"
 PS1+="\[${col_BUTime}\]\$(print_backup_check)"
