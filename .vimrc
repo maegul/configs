@@ -70,8 +70,8 @@ filetype plugin indent on    " required
 
 " Escape substitutes
 
-imap jj <Esc>
-imap kj <Esc>
+" imap jj <Esc>
+" imap kj <Esc>
 
 
 let mapleader=','
