@@ -37,7 +37,7 @@ complete -C '/usr/local/bin/aws_completer' aws
 # > pythonpath
 # Adds my personal script library to pythonpath
 export PYTHONPATH=${PYTHONPATH}:~/Dropbox/Science/scripts/
-export PYTHONPATH=${PYTHONPATH}:~/Developer/zekell/zekell_sqlite/
+# export PYTHONPATH=${PYTHONPATH}:~/Developer/zekell/zekell_sqlite/
 
 
 # For terminus in sublime text
@@ -344,7 +344,7 @@ shopt -s histappend
 # > Aliases
 
 # >> zekell
-alias zkl='/Users/errollloyd/Developer/zekell/zekell_sqlite/zekell.py'
+# alias zkl='/Users/errollloyd/Developer/zekell/zekell_sqlite/zekell.py'
 
 # Some alias play ... yay!
 
