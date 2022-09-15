@@ -1,5 +1,20 @@
 set nocompatible              " be iMproved, required
 
+" doesn't work!!
+" let &t_SI = "\e[6 q"
+" let &t_EI = "\e[2 q"
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" reset the cursor on start (for older versions of vim, usually not required)
+augroup myCmds
+au!
+autocmd VimEnter * silent !echo -ne "\e[2 q"
+augroup END
+set ttimeout
+set ttimeoutlen=1
+set ttyfast
+
 " Added filetype on to fix exit code bug toying with ipython
 filetype on
 filetype off                  " required
