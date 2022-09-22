@@ -326,12 +326,12 @@ export DYLD_FALLBACK_LIBRARY_PATH=$DYLD_FALLBACK_LIBRARY_PATH:~/abin
 # NPM global installs available by require()
 export NODE_PATH=/usr/local/lib/node_modules
 
-# shell options
+# > shell options
 
 # extglob - more regex options (?)
 shopt -s extglob
 
-# > history management
+# >> history management
 # allow preceding whitespace to prevent from being logged in history
 HISTCONTROL=ignorespace
 
