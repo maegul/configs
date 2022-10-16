@@ -579,6 +579,10 @@ alias aws_running_ssh_pychm='ssh ubuntu@$(aws_running_dns_pychm)'
 # transition complete(?)
 # alias pynew='source activate n3w'
 
+# >> jupytext
+alias jpt2md='jupytext --to md --from py:light'
+alias jpt2py='jupytext --to py:light --from md'
+
 # > Document Tools
 
 # >> markdown to docx
