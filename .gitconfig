@@ -37,3 +37,5 @@
 	tool = vimdiff
 [commit]
 	template = /Users/errollloyd/.stCommitMsg
+[hub]
+	protocol = git
