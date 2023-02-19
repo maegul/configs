@@ -515,6 +515,10 @@ jnb_send_dir() {
 
 # >> aws aliases
 
+# lif_hws instance shortcuts
+alias aws_lif_start="aws ec2 start-instances --profile maegul_user --instance-ids i-056ed6409a99e4022"
+alias aws_lif_stop="aws ec2 stop-instances --profile maegul_user --instance-ids i-056ed6409a99e4022"
+
 # take from macOS clipboard and set to awsinst
 alias aws_copy_ip='export awsinst=$(pbpaste)'
 
@@ -530,17 +534,17 @@ alias aws_list_running_ec2="aws ec2 describe-instances --query \"Reservations[*]
 
 alias aws_li="aws ec2 describe-instances | jq '.Reservations | .[] | .Instances | .[] | {type: .InstanceType, id: .InstanceId, state: .State.Name, tags: .Tags}'"
 
-alias aws_start="aws ec2 start-instances --profile maegul --instance-ids"
-alias aws_stop="aws ec2 stop-instances --profile maegul --instance-ids"
+alias aws_start="aws ec2 start-instances --profile maegul_user --instance-ids"
+alias aws_stop="aws ec2 stop-instances --profile maegul_user --instance-ids"
 
 # presumes single running instance for easy use
 aws_running_id() {
-	aws ec2 describe-instances --profile maegul | jq -r '.Reservations | .[] | .Instances | .[] | select(.State.Name=="running") | .InstanceId'
+	aws ec2 describe-instances --profile maegul_user | jq -r '.Reservations | .[] | .Instances | .[] | select(.State.Name=="running") | .InstanceId'
 }
 
 # presumes single running instance for easy use
 aws_running_dns(){
-	aws ec2 describe-instances --profile maegul | jq -r '.Reservations | .[] | .Instances | .[] | select(.State.Name=="running") | .PublicDnsName'
+	aws ec2 describe-instances --profile maegul_user | jq -r '.Reservations | .[] | .Instances | .[] | select(.State.Name=="running") | .PublicDnsName'
 }
 
 # presumes single running instance
