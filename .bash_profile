@@ -519,6 +519,9 @@ jnb_send_dir() {
 alias aws_lif_start="aws ec2 start-instances --profile maegul_user --instance-ids i-056ed6409a99e4022"
 alias aws_lif_stop="aws ec2 stop-instances --profile maegul_user --instance-ids i-056ed6409a99e4022"
 
+alias aws_lif_large_start="aws ec2 start-instances --profile maegul_user --instance-ids i-038e6c05f6dee7230"
+alias aws_lif_large_stop="aws ec2 stop-instances --profile maegul_user --instance-ids i-038e6c05f6dee7230"
+
 # take from macOS clipboard and set to awsinst
 alias aws_copy_ip='export awsinst=$(pbpaste)'
 
