@@ -123,7 +123,7 @@ function ranger_level(){
 }
 
 
-# > time symbol
+# >> time symbol
 # For converting current time to col idx from file
 source ~/.dotfiles/date_cols_test.sh
 # unicode for a filled sun symbol
@@ -142,7 +142,7 @@ print_time_symbol()
 	echo -e "$(tput setaf $(date_col_parse))${time_symbol} $(tput sgr0)"
 }
 
-# > tput and color
+# >> tput and color
 # Converts RGB coords (6x6x6) to ASNI color code
 function RGBcolor {
     echo "16 + $1 * 36 + $2 * 6 + $3" | bc
