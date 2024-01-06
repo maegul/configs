@@ -126,7 +126,8 @@ function ranger_level(){
 # >> time symbol
 # For converting current time to col idx from file
 source ~/.dotfiles/date_cols_test.sh
-# unicode for a filled sun symbol
+
+# unicode for a filled sun symbol and a moon
 
 time_sun_symbol="\xe2\x98\x80"
 time_moon_symbol="\xe2\x98\xbe"
