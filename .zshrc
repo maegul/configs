@@ -24,7 +24,7 @@ time_moon_symbol="\xe2\x98\xbe"
 print_time_symbol()
 {
 	date_now=$(date +"%H")
-	if [[ $date_now > 20 || $date_now < 5 ]]; then
+	if [[ "$date_now" -gt 20 || "$date_now" -lt 5 ]]; then
 		time_symbol=$time_moon_symbol
 	else
 		time_symbol=$time_sun_symbol
@@ -40,7 +40,7 @@ print_time_symbol()
 print_time_symbol_full_dt()
 {
 	date_now=$(date +"%H")
-	if [[ $date_now > 20 || $date_now < 5 ]]; then
+	if [[ "$date_now" -gt 20 || "$date_now" -lt 5 ]]; then
 		time_symbol=$time_moon_symbol
 	else
 		time_symbol=$time_sun_symbol
@@ -54,6 +54,27 @@ print_time_symbol_full_dt()
 
 # >> Git
 
+# >>> Custom function for no new commits
+
+branch_has_commits() {
+	# Check if in git repo
+	git -C . rev-parse 2>/dev/null
+	if [ "$?" -eq 0 ] ; then
+		local branch_name
+		local n_lines
+
+		branch_name="$(git rev-parse --abbrev-ref HEAD)"
+		n_lines="$(git show-branch | grep -c $branch_name)"
+
+		if [ "$n_lines" -gt 1 ]; then
+			echo ""
+		else
+			echo "?"
+		fi
+	fi
+}
+
+
 # >>> Use git provided script
 source ~/.dotfiles/.git-prompt.sh
 
@@ -63,7 +84,10 @@ GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWSTASHSTATE=1
 #colors only work if using PROMPT_COMMAND ??
 GIT_PS1_SHOWCOLORHINTS=1
-GIT_PS1_SHOWUPSTREAM="auto"
+# for zsh ... use an array of strings (as script expects automatic string splitting on spaces)
+GIT_PS1_SHOWUPSTREAM=(verbose name)
+# GIT_PS1_SHOWUPSTREAM="auto"
+# GIT_PS1_SHOWUPSTREAM="verbose"
 
 
 # >> Set colors for prompt (0-5 RGB colors)
@@ -82,8 +106,8 @@ _exitCodePromptC="$(RGBcolor 5 2 2)"
 # PS1='[%n@%m %c$(__git_ps1 " (%s)")]\$ '
 
 PS1='
-$(print_time_symbol_full_dt)
-%B%F{$_gitPromptC}$(__git_ps1 "(%s)")%f%b%F{$_dirPromptC}(%~)%f
+$(print_time_symbol_full_dt) %B%F{$_gitPromptC}$(__git_ps1 "(%s)")%f%b $(branch_has_commits)
+%F{$_dirPromptC}(%~)%f
 %(?..%K{$_exitCodePromptC}%F{black}%?%f%k )> '
 
 # PS1="

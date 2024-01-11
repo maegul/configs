@@ -68,12 +68,32 @@ sym_untracked=$(echo -e "\xf0\x9f\x95\xb8\x20") # Spider web
 sym_unstaged=$(echo -e "\xf0\x9f\x90\x9b\x20") # Caterpiller for new comings
 sym_staged=$(echo -e "\xf0\x9f\xa6\x8b\x20") # Butterfly for new life ready to fly away
 sym_stashed=$(echo -e "\xf0\x9f\x92\xb0\x20") # dollar bag for my stash
+sym_no_upstream=$(echo -e " ⚫️") # Black circle signifying an absence of a remote
+# sym_no_upstream=$(echo -e " \xe2\x9a\xab️") # Black circle signifying an absence of a remote
 sym_ahead_upstream=$(echo -e "\xf0\x9f\x8c\x8f\x20") # Earth for new things are on the ground
 sym_behind_upstream=$(echo -e "\xf0\x9f\x8c\xa7\x20") # Raining cloud for a pull and merge to come
 sym_equal_upstream=$(echo -e "🌈 ") # Rainbow for everything is good
 # sym_equal_upstream=$(echo -e "\xf0\x9f\x8c\x88\x20") # Rainbow for everything is good
 sym_diverged_upstream=$(echo -e "\xf0\x9f\x92\xa9\x20") # Shit show for it is now a shit show
 sym_init_commit=$(echo -e "\xf0\x9f\x8d\x84\x20") # Mushroom for all the new files or spores to be added
+
+sym_branch_has_commits=""
+sym_branch_has_no_commits="😑"
+
+__branch_has_commits() {
+	local branch_name
+	local n_lines
+
+	branch_name="$(git rev-parse --abbrev-ref HEAD)"
+	n_lines="$(git show-branch | grep -c $branch_name)"
+
+	if [ "$n_lines" -gt 1 ]; then
+		echo "$sym_branch_has_commits"
+	else
+		echo "$sym_branch_has_no_commits"
+	fi
+}
+
 
 # In addition, if you set GIT_PS1_SHOWDIRTYSTATE to a nonempty value,
 # unstaged (*) and staged (+) changes will be shown next to the branch
@@ -231,9 +251,11 @@ __git_ps1_show_upstream ()
 
 	# calculate the result
 	if [[ -z "$verbose" ]]; then
+		# echo "-z VERBOSE $verbose"
 		case "$count" in
 		"") # no upstream
-			p="" ;;
+			p="$sym_no_upstream $(__branch_has_commits)" ;;
+			# p="" ;;
 		"0	0") # equal to upstream
 			p="$sym_equal_upstream" ;;
 		"0	"*) # ahead of upstream
@@ -244,9 +266,11 @@ __git_ps1_show_upstream ()
 			p="$sym_diverged_upstream" ;;
 		esac
 	else
+		# echo "not -z VERBOSE $verbose"
 		case "$count" in
 		"") # no upstream
-			p="" ;;
+			p="$sym_no_upstream $(__branch_has_commits)" ;;
+			# p="" ;;
 		"0	0") # equal to upstream
 			p=" u=" ;;
 		"0	"*) # ahead of upstream
@@ -260,7 +284,8 @@ __git_ps1_show_upstream ()
 			__git_ps1_upstream_name=$(git rev-parse \
 				--abbrev-ref "$upstream" 2>/dev/null)
 			if [ $pcmode = yes ] && [ $ps1_expanded = yes ]; then
-				p="$p \${__git_ps1_upstream_name}"
+				p="$p ${__git_ps1_upstream_name}"
+				# p="$p \${__git_ps1_upstream_name}"
 			else
 				p="$p ${__git_ps1_upstream_name}"
 				# not needed anymore; keep user's
