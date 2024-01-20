@@ -272,22 +272,30 @@ __git_ps1_show_upstream ()
 			p="$sym_no_upstream $(__branch_has_commits)" ;;
 			# p="" ;;
 		"0	0") # equal to upstream
-			p=" u=" ;;
+			p="$sym_equal_upstream" ;;
 		"0	"*) # ahead of upstream
-			p=" u+${count#0	}" ;;
+			p="$sym_ahead_upstream (+${count#0	})" ;;
 		*"	0") # behind upstream
-			p=" u-${count%	0}" ;;
+			p="$sym_behind_upstream (-${count%	0})" ;;
 		*)	    # diverged from upstream
-			p=" u+${count#*	}-${count%	*}" ;;
+			p="$sym_diverged_upstream (${count#*	}-${count%	*})" ;;
+		# "0	0") # equal to upstream
+		# 	p=" u=" ;;
+		# "0	"*) # ahead of upstream
+		# 	p=" u+${count#0	}" ;;
+		# *"	0") # behind upstream
+		# 	p=" u-${count%	0}" ;;
+		# *)	    # diverged from upstream
+		# 	p=" u+${count#*	}-${count%	*}" ;;
 		esac
 		if [[ -n "$count" && -n "$name" ]]; then
 			__git_ps1_upstream_name=$(git rev-parse \
 				--abbrev-ref "$upstream" 2>/dev/null)
 			if [ $pcmode = yes ] && [ $ps1_expanded = yes ]; then
-				p="$p ${__git_ps1_upstream_name}"
+				p="$p-${__git_ps1_upstream_name}-"
 				# p="$p \${__git_ps1_upstream_name}"
 			else
-				p="$p ${__git_ps1_upstream_name}"
+				p="$p-${__git_ps1_upstream_name}-"
 				# not needed anymore; keep user's
 				# environment clean
 				unset __git_ps1_upstream_name
