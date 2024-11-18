@@ -10,7 +10,8 @@
 /Users/errollloyd/bin
 
 # brew binaries
-/usr/local/bin
+# Now migrated to M-chip ... cleaning up
+# /usr/local/bin
 
 # Personal thingys more associated with my bash profile and trivial custom things
 /Users/errollloyd/.dotfiles
@@ -19,7 +20,8 @@
 /Applications/Sublime Text 4.app/Contents/SharedSupport/bin
 
 # NEURON ... bless its heart
-/Applications/NEURON-7.4/nrn/x86_64/bin
+# /Applications/NEURON-7.4/nrn/x86_64/bin
 
 # for some old binaries that are probably not there any more :(
-/Users/errollloyd/abin
+# Let's forget about this now!
+# /Users/errollloyd/abin

@@ -15,10 +15,10 @@ stty -ixon
 
 
 # > aws tab-complete
-# path to aws-completer
-export PATH=/usr/local/aws/bin:$PATH
-# assigning completer
-complete -C '/usr/local/bin/aws_completer' aws
+# # path to aws-completer
+# export PATH=/usr/local/aws/bin:$PATH
+# # assigning completer
+# complete -C '/usr/local/bin/aws_completer' aws
 
 # for helm@2 (as helm is now on v3, but jupyterHub doesn't support)
 # installed via brew
@@ -717,34 +717,15 @@ function jnb {
 
 }
 
+# > Homebrew
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/errollloyd/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/errollloyd/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/errollloyd/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/errollloyd/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+# * It exports some env variables (prefixed with `HOMEBREW`), and compiles and updated `PATH` variable that is also exported
+# 	* It basically puts `/opt/homebrew/bin` and `/opt/homebrew/sbin` ahead of the current path.
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
-# > Kubernetes and Kubectl
-# kube plugins
-# custom plugins installed with custom install script in repo (currently located in pychm volume)
-export PATH=$PATH:~/.kube/plugins/jordanwilson230
+# > Old kubectl stuff (for pythoncharmers cluster)
 
-# for more standard plugin manager (no sure anything installed yet)
-export PATH="${PATH}:${HOME}/.krew/bin"
-
-test_func(){
-	echo $1
-}
 
 # kb_context(){
 # 	kubectl config current-context
@@ -820,12 +801,3 @@ test_func(){
 
 # }
 
-##
-# Your previous /Users/errollloyd/.bash_profile file was backed up as /Users/errollloyd/.bash_profile.macports-saved_2021-02-26_at_15:08:36
-##
-
-# MacPorts Installer addition on 2021-02-26_at_15:08:36: adding an appropriate PATH variable for use with MacPorts.
-export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-# Finished adapting your PATH environment variable for use with MacPorts.
-
-. "$HOME/.cargo/env"
