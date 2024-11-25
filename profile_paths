@@ -11,6 +11,7 @@
 
 # brew binaries
 # Now migrated to M-chip ... cleaning up
+# ... now inserted by a call to a homebrew command in profile
 # /usr/local/bin
 
 # Personal thingys more associated with my bash profile and trivial custom things
