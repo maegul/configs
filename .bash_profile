@@ -26,12 +26,6 @@ stty -ixon
 # export PATH="/usr/local/opt/helm@2/bin:$PATH"
 
 
-# export PATH=$PATH:~/abin
-
-# export PATH=/Applications/NEURON-7.4/nrn/x86_64/bin:$PATH #added by NEURON installer
-
-# export PATH="/usr/local/bin:$PATH"
-
 # export PATH="$HOME/bin:$PATH"
 
 # > pythonpath
@@ -57,6 +51,7 @@ export AWS_DEFAULT_PROFILE=maegul_user
 # Checking if interactive, to prepare prompt only for interactive
 # Using .bash_profile and .bashrc more appropriately may make this cleaner
 if [[ $- == *i* ]]
+# >>> Start Interactive
 then
 
 # Edits prompt
@@ -296,8 +291,7 @@ export LS_COLORS="$link_color:so=1;31:pi=1;33:$ex_color:bd=34;46:cd=34;43:su=30;
 # for exa specifically
 export EXA_COLORS="$current_user_color:$user_r_bit:$user_w_bit:$user_x_bit:$user_xd_bit:$grp_r_bit:$grp_w_bit:$grp_x_bit:$oth_r_bit:$oth_w_bit:$oth_x_bit"
 
-
-
+# >>> End Interactive
 fi
 
 # Add another directory to path, for MRI analysis software
@@ -724,6 +718,33 @@ function jnb {
 # 	* It basically puts `/opt/homebrew/bin` and `/opt/homebrew/sbin` ahead of the current path.
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+# > Pyenv
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+
+# from `> pyenv init - bash`
+PATH="$(bash --norc -ec 'IFS=:; paths=($PATH);
+for i in ${!paths[@]}; do
+if [[ ${paths[i]} == "''/Users/errollloyd/.pyenv/shims''" ]]; then unset '\''paths[i]'\'';
+fi; done;
+echo "${paths[*]}"')"
+export PATH="/Users/errollloyd/.pyenv/shims:${PATH}"
+export PYENV_SHELL=bash
+source '/opt/homebrew/Cellar/pyenv/2.5.3/completions/pyenv.bash'
+command pyenv rehash 2>/dev/null
+pyenv() {
+  local command=${1:-}
+  [ "$#" -gt 0 ] && shift
+  case "$command" in
+  rehash|shell)
+    eval "$(pyenv "sh-$command" "$@")"
+    ;;
+  *)
+    command pyenv "$command" "$@"
+    ;;
+  esac
+}
 
 # > Old kubectl stuff (for pythoncharmers cluster)
 
