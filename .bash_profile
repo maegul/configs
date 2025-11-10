@@ -340,6 +340,14 @@ shopt -s histappend
 
 # > Aliases
 
+# >> Terminal Utility
+
+# Process the history output as history command and fc command are difficult for getting the last
+# Note ... sed '-E' and '-H' are for expanded and enhanced respectively
+# sed is to filter out the line number
+# spaces in the sed pattern ('\s*\d*\s*') are for any spaces surrounding the line number
+alias lastcmd="history | tail -2 | head -1 | sed -EH 's/\s*\d*\s*//'"
+
 # >> zekell
 alias zkl='/Users/errollloyd/Developer/zekell/zekell_sqlite/zekell.py'
 
