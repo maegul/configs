@@ -733,28 +733,30 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 
-# from `> pyenv init - bash`
-PATH="$(bash --norc -ec 'IFS=:; paths=($PATH);
-for i in ${!paths[@]}; do
-if [[ ${paths[i]} == "''/Users/errollloyd/.pyenv/shims''" ]]; then unset '\''paths[i]'\'';
-fi; done;
-echo "${paths[*]}"')"
-export PATH="/Users/errollloyd/.pyenv/shims:${PATH}"
-export PYENV_SHELL=bash
-source '/opt/homebrew/Cellar/pyenv/2.5.3/completions/pyenv.bash'
-command pyenv rehash 2>/dev/null
-pyenv() {
-  local command=${1:-}
-  [ "$#" -gt 0 ] && shift
-  case "$command" in
-  rehash|shell)
-    eval "$(pyenv "sh-$command" "$@")"
-    ;;
-  *)
-    command pyenv "$command" "$@"
-    ;;
-  esac
-}
+eval "$(pyenv init - bash)"
+
+# from `> pyenv init - bash` directly (inserted by eval above)
+# PATH="$(bash --norc -ec 'IFS=:; paths=($PATH);
+# for i in ${!paths[@]}; do
+# if [[ ${paths[i]} == "''/Users/errollloyd/.pyenv/shims''" ]]; then unset '\''paths[i]'\'';
+# fi; done;
+# echo "${paths[*]}"')"
+# export PATH="/Users/errollloyd/.pyenv/shims:${PATH}"
+# export PYENV_SHELL=bash
+# source '/opt/homebrew/Cellar/pyenv/2.5.3/completions/pyenv.bash'
+# command pyenv rehash 2>/dev/null
+# pyenv() {
+#   local command=${1:-}
+#   [ "$#" -gt 0 ] && shift
+#   case "$command" in
+#   rehash|shell)
+#     eval "$(pyenv "sh-$command" "$@")"
+#     ;;
+#   *)
+#     command pyenv "$command" "$@"
+#     ;;
+#   esac
+# }
 
 # > Old kubectl stuff (for pythoncharmers cluster)
 
