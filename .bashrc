@@ -350,10 +350,11 @@ shopt -s histappend
 # spaces in the sed pattern ('\s*\d*\s*') are for any spaces surrounding the line number
 alias lastcmd="history | tail -2 | head -1 | sed -EH 's/\s*\d*\s*//'"
 
+# use (neo)vim as man pager
+alias
+
 # >> zekell
 alias zkl='/Users/errollloyd/Developer/zekell/zekell_sqlite/zekell.py'
-
-# Some alias play ... yay!
 
 # >> File management with ls / eza (successor to exa)
 
@@ -637,17 +638,20 @@ gh_fork() {
 	git --track origin master
 }
 
-# for viewing man pages in vim
+
+# > Shell Hacks
+
+# >> (Neo)Vim as man pager
+
 vman() {
-	vim -c "SuperMan $*"
+	# vim -c "SuperMan $*"
+	nvim "+hide Man $*"
 
 	if [ "$?" != "0" ]; then
 		echo "No manual entry for $*"
 	fi
 }
 
-
-# > Shell Hacks
 
 # >> quick find
 
@@ -727,6 +731,9 @@ function jnb {
 # * It exports some env variables (prefixed with `HOMEBREW`), and compiles and updated `PATH` variable that is also exported
 # 	* It basically puts `/opt/homebrew/bin` and `/opt/homebrew/sbin` ahead of the current path.
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# >> Postgresql binaries on path
+export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
 
 # > Pyenv
 
